@@ -1,0 +1,362 @@
+.sliderContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none; /* Hide default cursor on desktop */
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.sliderWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 20px;
+  overflow: visible;
+}
+
+.slider {
+  width: 100%;
+}
+
+/* Custom styles for Slick */
+:global(.slick-list) {
+  overflow: visible !important;
+}
+
+:global(.slick-track) {
+  display: flex !important;
+  align-items: center;
+}
+
+/* Style for non-active slides */
+:global(.slick-slide:not(.slick-current)) {
+  transform: scale(0.7);
+  opacity: 0.4;
+  filter: blur(2px);
+  transition: all 0.5s ease;
+}
+
+/* The container for non-active slides */
+:global(.slick-slide:not(.slick-current)) .laptopMockup {
+  transform: perspective(1000px) rotateX(5deg) scale(0.7);
+}
+
+/* Style for active center slide */
+:global(.slick-current) {
+  opacity: 1;
+  filter: blur(0);
+  z-index: 10;
+  transition: all 0.5s ease;
+}
+
+.slide {
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.laptopMockup {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16/10;
+  border-radius: 16px;
+  overflow: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(5deg);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+  transition: all 0.5s ease;
+}
+
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Slide information */
+.slideInfo {
+  position: absolute;
+  bottom: 150px;
+  left: 140px;
+  color: white;
+  z-index: 10;
+}
+
+.slideTitle {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.slideSubtitle {
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0;
+  opacity: 0.7;
+  max-width: 400px;
+}
+
+/* Bottom navigation */
+.bottomNav {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 140px 60px;
+  color: white;
+  z-index: 10;
+}
+
+/* Pagination indicators */
+.pagination {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.currentPage {
+  font-weight: 600;
+}
+
+.pageDivider {
+  margin: 0 10px;
+}
+
+.totalPages {
+  opacity: 0.6;
+}
+
+/* Category buttons */
+.categoryButtons {
+  display: flex;
+  gap: 16px;
+}
+
+.categoryButton {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.categoryButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Custom cursor - FIXED POSITIONING */
+.customCursor {
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.2s ease, transform 0.01s linear;
+  color: white;
+  mix-blend-mode: difference;
+  /* No position or transform here - these are applied inline */
+}
+
+.cursorCircle {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursorArrow {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.viewCase {
+  padding: 8px 16px;
+  border: 1px solid white;
+  border-radius: 2px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.cursorHidden {
+  opacity: 0;
+}
+
+/* Tablet Responsive adjustments */
+@media (max-width: 1200px) {
+  .slideInfo {
+    left: 80px;
+    bottom: 140px;
+  }
+  
+  .bottomNav {
+    padding: 30px 80px 50px;
+  }
+  
+  .laptopMockup {
+    max-width: 85%;
+  }
+  
+  .slideTitle {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sliderContainer {
+    cursor: none; /* Keep custom cursor on all devices */
+  }
+  
+  .slideInfo {
+    left: 60px;
+    bottom: 130px;
+  }
+  
+  .bottomNav {
+    padding: 25px 60px 40px;
+  }
+  
+  .laptopMockup {
+    max-width: 80%;
+  }
+  
+  .slideTitle {
+    font-size: 36px;
+  }
+  
+  .slideSubtitle {
+    font-size: 15px;
+    max-width: 350px;
+  }
+  
+  .categoryButton {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile Responsive adjustments */
+@media (max-width: 768px) {
+  /* Adjust cursor size for mobile */
+  .cursorCircle {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .cursorArrow {
+    font-size: 20px;
+  }
+  
+  .viewCase {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  .sliderContainer {
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .laptopMockup {
+    max-width: 90%;
+    transform: perspective(1000px) rotateX(3deg);
+  }
+  
+  .mobileInfo {
+    position: relative;
+    left: 0;
+    bottom: auto;
+    padding: 40px 20px 0;
+    text-align: center;
+  }
+  
+  .slideTitle {
+    font-size: 32px;
+  }
+  
+  .slideSubtitle {
+    font-size: 14px;
+    margin: 0 auto;
+  }
+  
+  .mobileNav {
+    padding: 20px 20px 40px;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .categoryButtons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .categoryButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .pagination {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further reduce cursor size for small mobile */
+  .cursorCircle {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .cursorArrow {
+    font-size: 18px;
+  }
+  
+  .viewCase {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+  .laptopMockup {
+    max-width: 95%;
+    transform: perspective(1000px) rotateX(2deg);
+  }
+  
+  .slideTitle {
+    font-size: 28px;
+  }
+  
+  .slideSubtitle {
+    font-size: 13px;
+    max-width: 300px;
+  }
+  
+  .categoryButton {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}

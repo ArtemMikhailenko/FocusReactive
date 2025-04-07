@@ -1,0 +1,159 @@
+/* CustomerReviews.module.css */
+.reviewsSection {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+  
+  .container {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* Clutch Rating Styles */
+  .clutchRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .clutchTitle {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .starsContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .star {
+    color: #4CD964;
+    font-size: 1.5rem;
+  }
+  
+  .ratingValue {
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  /* Headline Styles */
+  .headlineContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .headline {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 110%;
+    position: relative;
+    text-align: center;
+  }
+  
+  .headlinePrefix {
+    color: #fff;
+  }
+  
+  .highlightedText {
+    position: relative;
+    display: inline-flex;
+    /* align-items: center; */
+    cursor: pointer;
+  }
+  
+  .customerReviews {
+    color: #4CD964;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .underline {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background-color: #4CD964;
+    width: 100%;
+    transform-origin: left;
+  }
+  
+  .arrow {
+    color: #4CD964;
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 1.5rem;
+    transform-origin: center;
+  }
+  
+  .headlineSuffix {
+    color: #fff;
+    /* display: block; */
+  }
+  
+  .subheadline {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 400;
+    opacity: 0.9;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .headline {
+      font-size: clamp(2rem, 7vw, 3.5rem);
+    }
+    
+    .star {
+      font-size: 1.2rem;
+    }
+    
+    .ratingValue {
+      font-size: 1.2rem;
+    }
+    
+    .underline {
+      bottom: -3px;
+      height: 1.5px;
+    }
+    
+    .arrow {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .reviewsSection {
+      padding: 3rem 1rem;
+    }
+    
+    .headline {
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
+    }
+    
+    .star {
+      font-size: 1rem;
+    }
+    
+    .ratingValue {
+      font-size: 1rem;
+    }
+  }

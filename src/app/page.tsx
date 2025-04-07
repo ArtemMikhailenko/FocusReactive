@@ -1,95 +1,70 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import HeroSection from "@/components/Hero/Hero";
+import CaseShowcase from "@/components/CaseShowcase/CaseShowcase";
+import LogoCarousel from "@/components/LogoCarousel/LogoCarousel";
+import AnimatedHeadline from "@/components/AnimatedHeadline/AnimatedHeadline";
+import ScrollMetrics from "@/components/ScrollMetrics/ScrollMetrics";
+import CustomerReviews from "@/components/CustomerReviews/CustomerReviews";
+import ExactMetrics from "@/components/ScrollMetrics/ScrollMetrics";
+import StackedMetrics from "@/components/ScrollMetrics/ScrollMetrics";
+import MetricsAnimation from "@/components/ScrollMetrics/ScrollMetrics";
+import SliderSection from "@/components/CaseShowcase/CaseShowcase";
+const caseData = [
+  {
+    id: 'alchemy',
+    title: 'Alchemy',
+    subtitle: 'The most reliable way to build web3 apps',
+    imageUrl: '/images/showcase/alchemy-case.jpg',
+    caseUrl: '/case-studies/alchemy',
+    tags: ['UX Consultancy', 'Performance', 'Technical SEO & Data Layer']
+  },
+  {
+    id: 'calvin-klein',
+    title: 'Calvin Klein',
+    subtitle: 'An Iconic Shopify Online Store Reborn',
+    imageUrl: '/images/showcase/calvin-klein-case.jpg',
+    caseUrl: '/case-studies/calvin-klein',
+    tags: ['UX Consultancy', 'Performance', 'Technical SEO & Data Layer']
+  },
+  {
+    id: 'meta',
+    title: 'Meta',
+    subtitle: 'Building the foundation of the Metaverse',
+    imageUrl: '/images/showcase/meta-case.jpg',
+    caseUrl: '/case-studies/meta',
+    tags: ['UX Consultancy', 'Performance', '3D Development']
+  },
+  {
+    id: 'spotify',
+    title: 'Spotify',
+    subtitle: 'Redesigning the creator experience',
+    imageUrl: '/images/showcase/spotify-case.jpg',
+    caseUrl: '/case-studies/spotify',
+    tags: ['UX Design', 'Frontend Development', 'Animation']
+  },
+  {
+    id: 'nike',
+    title: 'Nike',
+    subtitle: 'Enhancing the digital shopping experience',
+    imageUrl: '/images/showcase/nike-case.jpg',
+    caseUrl: '/case-studies/nike',
+    tags: ['eCommerce', 'Headless CMS', 'Performance']
+  }
+];
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div >
+      <HeroSection/>
+      <SliderSection/>
+      <LogoCarousel 
+        speed={55} 
+        pauseOnHover={true} 
+      />
+       <AnimatedHeadline />
+       <ScrollMetrics />
+       <CustomerReviews/>
     </div>
   );
 }

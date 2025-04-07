@@ -1,0 +1,94 @@
+/* LogoCarousel.module.css */
+.carouselContainer {
+  width: 100%;
+  overflow: hidden;
+  background-color: #000;
+  padding: 4rem 0;
+  position: relative;
+  margin-top: 100px;
+}
+
+.carouselContainer::before,
+.carouselContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.carouselContainer::before {
+  left: 0;
+  background: linear-gradient(to right, #000, transparent);
+}
+
+.carouselContainer::after {
+  right: 0;
+  background: linear-gradient(to left, #000, transparent);
+}
+
+.innerCarousel {
+  display: flex;
+  width: fit-content;
+  animation: scroll 85s linear infinite;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+.logoTrack {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding-right: 2rem; /* Space between the two tracks */
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  filter: brightness(0.9) grayscale(1);
+}
+
+.logoWrapper:hover .logo {
+  opacity: 1;
+  filter: brightness(1) grayscale(0);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Move exactly half the width */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carouselContainer {
+    padding: 2rem 0;
+  }
+  
+  .logoTrack {
+    gap: 2rem;
+  }
+  
+  .logoWrapper {
+    min-width: 100px;
+  }
+}

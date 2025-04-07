@@ -1,0 +1,495 @@
+.heroSection {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.content {
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 10rem; /* 160px */
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  position: relative;
+}
+
+/* HEADLESS row with gear icon */
+.headlessRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.headless {
+  display: inline-block;
+  color: #fff;
+}
+
+.gearIcon {
+  margin-left: -0.5rem;
+  transform-origin: center;
+  animation: rotateGear 20s linear infinite;
+}
+
+@keyframes rotateGear {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* COMMERCE row with device icon */
+.commerceRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2.5rem;
+}
+
+.deviceContainer {
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.deviceIcon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.commerce {
+  display: inline-block;
+  color: #4CD964;
+}
+
+/* AGENCY row */
+.agencyRow {
+  margin-left: 2.5rem;
+  margin-top: -1.5rem;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.agency {
+  display: inline-block;
+  color: #fff;
+}
+
+
+
+/* Enhanced CTA Button with interactive effects */
+.ctaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4CD964;
+  color: #000;
+  height: 100%;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 1.5rem 3rem;
+  border-radius: 5rem;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 1;
+}
+
+.ctaText {
+  position: relative;
+  z-index: 3;
+}
+
+/* Interactive bubble effect that follows cursor */
+.ctaBubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.ctaButton:hover .ctaBubble {
+  opacity: 0.4;
+}
+
+/* Pulsing glow effect */
+.ctaGlow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 55px;
+  background: linear-gradient(90deg, #4CD964, #34FF47, #4CD964);
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ctaButton:hover .ctaGlow {
+  opacity: 1;
+  animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.03); }
+  100% { opacity: 0.5; transform: scale(1); }
+}
+
+/* Pulse ripple effect */
+.ctaPulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  z-index: 2;
+}
+
+.ctaButton:hover .ctaPulse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  box-shadow: 0 0 0 2px rgba(76, 217, 100, 0.6);
+  animation: pulseRings 1.5s infinite;
+}
+
+@keyframes pulseRings {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.ctaButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(76, 217, 100, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.ctaButton:active {
+  transform: translateY(-2px);
+}
+
+/* Bottom content with rating and social links */
+.bottomContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding-top: 2rem;
+  margin-top: auto;
+}
+
+.clutchRating {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #4CD964;
+}
+
+.star {
+  font-size: 1rem;
+}
+
+.rating {
+  margin-left: 0.5rem;
+  color: #fff;
+}
+
+.tagline {
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.socialLink:hover {
+  background-color: #4CD964;
+  color: #000;
+  border-color: #4CD964;
+}
+
+/* Large screens (1440px and above) */
+@media (min-width: 1440px) {
+  .heading {
+    font-size: 11rem; /* 176px */
+  }
+  
+  .ctaButton {
+    font-size: 1.5rem;
+    padding: 1.75rem 3.5rem;
+    height: 100%;
+    min-height: 122px;
+  }
+}
+
+/* Laptops and smaller desktops (1024px - 1279px) */
+@media (max-width: 1279px) {
+  .heading {
+    font-size: 8rem; /* 128px */
+  }
+  
+  .container {
+    gap: 3rem;
+  }
+  
+  .gearIcon {
+    width: 120px;
+    height: auto;
+  }
+  
+  .deviceIcon {
+    width: 140px;
+    height: auto;
+  }
+  
+  .commerceRow {
+    margin-top: -2rem;
+  }
+  
+  .agencyRow {
+    margin-top: -1rem;
+    margin-left: 2rem;
+  }
+}
+
+/* Tablets (768px - 1023px) */
+@media (max-width: 1023px) {
+  .heading {
+    font-size: 6rem; /* 96px */
+  }
+  
+  .container {
+    gap: 2.5rem;
+  }
+  
+  .gearIcon {
+    width: 100px;
+    height: auto;
+  }
+  
+  .deviceIcon {
+    width: 120px;
+    height: auto;
+  }
+  
+  .commerceRow {
+    margin-top: -1.5rem;
+  }
+  
+  .agencyRow {
+    margin-top: -0.75rem;
+    margin-left: 1.5rem;
+  }
+  
+  .bottomContent {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .tagline {
+    order: 3;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .clutchRating {
+    order: 1;
+  }
+  
+  .socialLinks {
+    order: 2;
+  }
+  
+  .ctaButton {
+    padding: 1.25rem 2.5rem;
+  }
+}
+
+/* Large Mobile (480px - 767px) */
+@media (max-width: 767px) {
+  .heroSection {
+    padding: 1.5rem;
+  }
+  
+  .heading {
+    font-size: 4.5rem; /* 72px */
+  }
+  
+  .container {
+    gap: 2rem;
+  }
+  
+  .gearIcon {
+    width: 70px;
+    height: auto;
+  }
+  
+  .deviceIcon {
+    width: 80px;
+    height: auto;
+  }
+  
+  .commerceRow {
+    margin-top: -1rem;
+  }
+  
+  .agencyRow {
+    margin-top: -0.5rem;
+    margin-left: 1rem;
+  }
+  
+  .bottomContent {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .clutchRating {
+    align-items: center;
+  }
+  
+  .tagline {
+    text-align: center;
+  }
+  
+  .desktopBreak {
+    display: none;
+  }
+  
+  .ctaContainer {
+    margin-top: 2rem;
+  }
+  
+  .ctaButton {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    min-height: 50px;
+  }
+}
+
+/* Small Mobile (320px - 479px) */
+@media (max-width: 479px) {
+  .heroSection {
+    padding: 1rem;
+  }
+  
+  .heading {
+    font-size: 3rem; /* 48px */
+  }
+  
+  .container {
+    gap: 1.5rem;
+  }
+  
+  .gearIcon {
+    width: 50px;
+    height: auto;
+  }
+  
+  .deviceIcon {
+    width: 60px;
+    height: auto;
+  }
+  
+  .commerceRow {
+    margin-top: -0.5rem;
+  }
+  
+  .agencyRow {
+    margin-top: -0.25rem;
+    margin-left: 0.5rem;
+  }
+  
+  .ctaContainer {
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+  
+  .ctaButton {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+    justify-content: center;
+  }
+  
+  .socialLinks {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .socialLink {
+    width: 35px;
+    height: 35px;
+    font-size: 0.875rem;
+  }
+  
+  .tagline {
+    font-size: 0.875rem;
+  }
+}

@@ -1,0 +1,146 @@
+/* AnimatedHeadline.module.css */
+.headlineSection {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    color: #fff;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1.5rem; */
+  }
+  
+  .introText {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+  }
+  
+  .mainHeadline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* gap: 1rem; */
+    position: relative;
+  }
+  
+  .headlineLine {
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 90%;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+  }
+  
+  /* Feature badge styles */
+  .featureBadge {
+    position: absolute;
+    background-color: #4CD964;
+    color: #000;
+    font-weight: 600;
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    will-change: transform;
+    box-shadow: 0 4px 15px rgba(76, 217, 100, 0.3);
+    z-index: 5;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  /* Add a subtle glow effect on the badges */
+  .featureBadge::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 55px;
+    background: linear-gradient(45deg, transparent, rgba(76, 217, 100, 0.3), transparent);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .badgeIcon {
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Hover effects */
+  .featureBadge:hover {
+    box-shadow: 0 8px 25px rgba(76, 217, 100, 0.5);
+  }
+  
+  .featureBadge:hover::before {
+    opacity: 1;
+  }
+  
+  /* Add a subtle gradient background for depth */
+  .headlineSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(76, 217, 100, 0.05), transparent 60%);
+    pointer-events: none;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 2rem 1rem;
+    }
+    
+    .headlineLine {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      white-space: normal;
+      text-align: center;
+    }
+    
+    .featureBadge {
+      transform: scale(0.8);
+    }
+  }
+  
+  /* Extra small screens */
+  @media (max-width: 480px) {
+    .featureBadge {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.75rem;
+    }
+    
+    .badgeIcon {
+      font-size: 0.9rem;
+    }
+  }
