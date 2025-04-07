@@ -11,6 +11,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .sliderWrapper {
@@ -24,27 +26,36 @@
   justify-content: center;
   padding-top: 20px;
   overflow: visible;
+  will-change: transform; /* Optimize for animations */
 }
 
 .slider {
   width: 100%;
 }
 
-/* В файле SliderSection.module.css */
+/* Slick overrides */
 .sliderContainer :global(.slick-list) {
   overflow: visible !important;
+  will-change: transform; /* Hardware acceleration */
 }
 
 .sliderContainer :global(.slick-track) {
   display: flex !important;
   align-items: center;
+  will-change: transform; /* Hardware acceleration */
+}
+
+.sliderContainer :global(.slick-slide) {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
+              opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
+              filter 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform, opacity, filter; /* Optimize animations */
 }
 
 .sliderContainer :global(.slick-slide:not(.slick-current)) {
   transform: scale(0.7);
   opacity: 0.4;
   filter: blur(2px);
-  transition: all 0.5s ease;
 }
 
 .sliderContainer :global(.slick-slide:not(.slick-current)) .laptopMockup {
@@ -55,9 +66,7 @@
   opacity: 1;
   filter: blur(0);
   z-index: 10;
-  transition: all 0.5s ease;
 }
-
 
 .slide {
   padding: 0 20px;
@@ -65,7 +74,7 @@
   display: flex !important;
   justify-content: center;
   align-items: center;
-  transition: all 0.5s ease;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .laptopMockup {
@@ -80,13 +89,15 @@
   transform: perspective(1000px) rotateX(5deg);
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
   margin: 0 auto;
-  transition: all 0.5s ease;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform; /* Optimize for animations */
 }
 
 .slideImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: translateZ(0); /* Force GPU acceleration */
 }
 
 /* Slide information */
@@ -96,6 +107,7 @@
   left: 140px;
   color: white;
   z-index: 10;
+  transition: opacity 0.3s ease;
 }
 
 .slideTitle {
@@ -148,6 +160,7 @@
 .categoryButtons {
   display: flex;
   gap: 16px;
+  transition: opacity 0.3s ease;
 }
 
 .categoryButton {
@@ -159,6 +172,12 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .categoryButton:hover {
@@ -169,9 +188,11 @@
 .customCursor {
   pointer-events: none;
   z-index: 9999;
-  transition: opacity 0.2s ease, transform 0.01s linear;
+  transition: opacity 0.2s ease;
+  transform-origin: center center;
   color: white;
   mix-blend-mode: difference;
+  will-change: transform, left, top; /* Optimize for animations */
   /* No position or transform here - these are applied inline */
 }
 
@@ -184,6 +205,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .cursorArrow {
@@ -274,6 +296,7 @@
     padding: 6px 12px;
     font-size: 0.75rem;
   }
+  
   .sliderContainer {
     height: auto;
     min-height: 100vh;
@@ -339,6 +362,7 @@
     padding: 5px 10px;
     font-size: 0.7rem;
   }
+  
   .laptopMockup {
     max-width: 95%;
     transform: perspective(1000px) rotateX(2deg);

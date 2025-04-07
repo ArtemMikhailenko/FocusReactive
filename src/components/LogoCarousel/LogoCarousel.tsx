@@ -8,50 +8,50 @@ const logos = [
     id: 'easypark',
     name: 'EasyPark',
     imageUrl: '/partner/logo1.png',
-    width: 150,
-    height: 40
+    width: 118,
+    height: 29
   },
   {
     id: 'tipico',
     name: 'Tipico',
     imageUrl: '/partner/logo2.png',
-    width: 130,
-    height: 40
+    width: 92,
+    height: 30
   },
   {
     id: 'caleffi',
     name: 'Caleffi',
     imageUrl: '/partner/logo3.png',
-    width: 120,
-    height: 50
+    width: 98,
+    height: 59
   },
   {
     id: 'trafficguard',
     name: 'Traffic Guard',
     imageUrl: '/partner/logo4.png',
-    width: 170,
-    height: 30
+    width: 122,
+    height: 61
   },
   {
     id: 'gitnation',
     name: 'Git Nation',
     imageUrl: '/partner/logo5.png',
-    width: 140,
+    width: 114,
     height: 40
   },
   {
     id: 'secretescapes',
     name: 'Secret Escapes',
     imageUrl: '/partner/logo6.png',
-    width: 160,
+    width: 123,
     height: 35
   },
   {
     id: 'bargreen',
     name: 'Bargreen Ellingson',
     imageUrl: '/partner/logo7.png',
-    width: 180,
-    height: 30
+    width: 132,
+    height: 50
   }
 ];
 

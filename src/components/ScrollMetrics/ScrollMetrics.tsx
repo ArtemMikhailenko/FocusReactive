@@ -87,8 +87,8 @@ const ScrollMetrics: React.FC = () => {
 
     // Different trigger points for mobile and desktop
     const triggerPoints = isMobile 
-      ? { first: "top 70%", second: "top 60%", third: "top 50%" } 
-      : { first: "top 40%", second: "top 30%", third: "top 20%" };
+      ? { first: "top 45%", second: "top 35%", third: "top 5%" } 
+      : { first: "top 45%", second: "top 35%", third: "top 5%" };
 
     // Section entrance animation
     gsap.fromTo(

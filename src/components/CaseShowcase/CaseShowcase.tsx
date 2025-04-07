@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 //@ts-ignore
 import Slider from "react-slick";
 import styles from "./SliderSection.module.css";
@@ -13,6 +13,7 @@ interface SlideItem {
   title: string;
   subtitle: string;
   image: string;
+  categories: string[]; // Add categories for each slide
 }
 
 const slidesData: SlideItem[] = [
@@ -20,31 +21,36 @@ const slidesData: SlideItem[] = [
     id: 1,
     title: "Calvin Klein",
     subtitle: "An Iconic Shopify Online Store Reborn",
-    image: "/slider.png"
+    image: "/slider.webp",
+    categories: ["UX Consultancy", "Performance", "Technical SEO & Data Layer"]
   },
   {
     id: 2,
     title: "Gucci",
     subtitle: "Luxury Reimagined for Digital",
-    image: "/slider.png"
+    image: "/slider.webp",
+    categories: ["Brand Strategy", "E-Commerce", "Custom Development"]
   },
   {
     id: 3,
     title: "Louis Vuitton",
     subtitle: "Heritage Meets Innovation",
-    image: "/slider.png"
+    image: "/slider.webp",
+    categories: ["UI Design", "Mobile Optimization", "Headless Commerce"]
   },
   {
     id: 4,
     title: "Adidas",
     subtitle: "Performance Driven E-Commerce",
-    image: "/slider.png"
+    image: "/slider.webp",
+    categories: ["Performance", "Analytics", "User Testing"]
   },
   {
     id: 5,
     title: "Nike",
     subtitle: "Just Shop It",
-    image: "/slider.png"
+    image: "/slider.webp",
+    categories: ["Conversion Rate", "UX Research", "Frontend Development"]
   }
 ];
 
@@ -68,10 +74,19 @@ const SliderSection: React.FC = () => {
     };
     
     checkDeviceType();
-    window.addEventListener('resize', checkDeviceType);
+    
+    // Use debounced resize event for better performance
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(checkDeviceType, 100);
+    };
+    
+    window.addEventListener('resize', handleResize);
     
     return () => {
-      window.removeEventListener('resize', checkDeviceType);
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(resizeTimer);
     };
   }, []);
 
@@ -137,33 +152,39 @@ const SliderSection: React.FC = () => {
     };
   }, []);
 
-  // Mouse movement handler with fixed cursor position
+  // Optimized mouse movement handler using throttling
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     
-    // Always update cursor position even if we're determining zones
+    // Calculate cursor position
     const xPos = e.clientX;
     const yPos = e.clientY;
     
-    setCursorPos({ x: xPos, y: yPos });
-    
-    // Determine zone (left third, center third, right third)
-    const rect = containerRef.current.getBoundingClientRect();
-    const relativeX = e.clientX - rect.left;
-    const zoneWidth = rect.width / 3;
-    
-    if (relativeX < zoneWidth) {
-      setCursorZone("left");
-    } else if (relativeX > 2 * zoneWidth) {
-      setCursorZone("right");
-    } else {
-      setCursorZone("center");
-    }
-    
-    // Force cursor visibility when moving
-    if (!cursorVisible) {
-      setCursorVisible(true);
-    }
+    // Update cursor position using requestAnimationFrame for smoother updates
+    requestAnimationFrame(() => {
+      setCursorPos({ x: xPos, y: yPos });
+      
+      // Determine zone (left third, center third, right third)
+      const rect = containerRef.current!.getBoundingClientRect();
+      const relativeX = xPos - rect.left;
+      const zoneWidth = rect.width / 3;
+      
+      let newZone: "left" | "right" | "center" = "center";
+      if (relativeX < zoneWidth) {
+        newZone = "left";
+      } else if (relativeX > 2 * zoneWidth) {
+        newZone = "right";
+      }
+      
+      if (newZone !== cursorZone) {
+        setCursorZone(newZone);
+      }
+      
+      // Force cursor visibility when moving
+      if (!cursorVisible) {
+        setCursorVisible(true);
+      }
+    });
   };
 
   // Click handler for navigation
@@ -178,8 +199,8 @@ const SliderSection: React.FC = () => {
     }
   };
 
-  // Determine current cursor class
-  const getCursorClass = () => {
+  // Memoize cursor class for better performance
+  const cursorClass = useMemo(() => {
     if (!cursorVisible) return styles.cursorHidden;
     
     switch (cursorZone) {
@@ -192,7 +213,7 @@ const SliderSection: React.FC = () => {
       default:
         return "";
     }
-  };
+  }, [cursorVisible, cursorZone]);
 
   // Dynamic slider settings based on device type
   const getCenterPadding = () => {
@@ -201,8 +222,8 @@ const SliderSection: React.FC = () => {
     return '300px';
   };
 
-  // Slider settings
-  const settings = {
+  // Memoize slider settings to prevent unnecessary re-renders
+  const settings = useMemo(() => ({
     dots: false,
     infinite: true,
     speed: 500,
@@ -214,6 +235,9 @@ const SliderSection: React.FC = () => {
     beforeChange: (current: number, next: number) => {
       setCurrentSlide(next);
     },
+    cssEase: "cubic-bezier(0.23, 1, 0.32, 1)", // Add smooth easing
+    useCSS: true,
+    useTransform: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -228,7 +252,10 @@ const SliderSection: React.FC = () => {
         }
       }
     ]
-  };
+  }), [isMobile, isTablet, getCenterPadding]);
+
+  // Get current slide categories
+  const currentCategories = slidesData[currentSlide]?.categories || [];
 
   return (
     <div
@@ -246,6 +273,7 @@ const SliderSection: React.FC = () => {
                   src={slide.image}
                   alt={slide.title}
                   className={styles.slideImage}
+                  loading="eager" // Ensure images are loaded quickly
                 />
               </div>
             </div>
@@ -263,7 +291,7 @@ const SliderSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Bottom navigation */}
+      {/* Bottom navigation with dynamic categories */}
       <div className={`${styles.bottomNav} ${isMobile ? styles.mobileNav : ''}`}>
         <div className={styles.pagination}>
           <span className={styles.currentPage}>{currentSlide + 1}</span>
@@ -272,21 +300,24 @@ const SliderSection: React.FC = () => {
         </div>
         
         <div className={styles.categoryButtons}>
-          <button className={styles.categoryButton}>UX Consultancy</button>
-          <button className={styles.categoryButton}>Performance</button>
-          <button className={styles.categoryButton}>Technical SEO & Data Layer</button>
+          {currentCategories.map((category, index) => (
+            <button key={`${currentSlide}-${index}`} className={styles.categoryButton}>
+              {category}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Custom cursor - fixed positioning */}
+      {/* Custom cursor - fixed positioning with will-change optimization */}
       <div
-        className={`${styles.customCursor} ${getCursorClass()}`}
+        className={`${styles.customCursor} ${cursorClass}`}
         style={{
           position: 'fixed',
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,
           transform: 'translate(-50%, -50%)',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          willChange: 'transform' // Optimize for animations
         }}
       >
         {cursorZone === "left" && (
